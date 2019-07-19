@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\ExampleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,3 +15,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/hello', 'ExampleController@hello')->name('example.hello');
+
+Route::get('/gioithieubanthan', 'ExampleController@hello1')->name('gioithieu.hello1');
+
+Route::get('/hoctap/php', 'ExampleController@khainiemphp')->name('example.khainiemphp');
+
+Route::get('/hoctap/laravel', 'ExampleController@phienbanlaravel')->name('example.phienbanlaravel');
+
+Route::get('/ngayhomnay', 'ExampleController@datetime')->name('example.datetime');
