@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $table        = 'products';
-    protected $fillable     = ['product_code', 'product_name', 'image', 'description', 'standard_code', 'list_price', 'quantily_per_unit', 'discontinued', 'discount', 'category_id', 'supplier_id'];
+    public $timestamps = false;
+    protected $table        = 'product';
+    protected $fillable     = ['product_code', 'product_name', 'description', 'image', 'standar_cost', 'list_price', 'quantity_per_unit', 'discontinue', 'discount', 'category_id', 'suppliers_id'];
     protected $guarded      = ['id'];
     protected $primaryKey   = 'id';
     //Tạo quan hệ vs categories
@@ -15,7 +16,7 @@ class Product extends Model
         return $this->belongsTo('App\Category', 'category_id', 'id');
     }
     public function supplier(){
-        return $this->belongsTo('App\Supplier', 'supplier_id', 'id');
+        return $this->belongsTo('App\Supplier', 'suppliers_id', 'id');
     }
 
     //Tạo quan hệ cha đối với order_detail
