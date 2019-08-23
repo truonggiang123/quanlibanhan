@@ -8,6 +8,6 @@ use App\Http\Controllers\Controller;
 class PageController extends Controller
 {
     public function darboard(){
-        return view('backend.layouts.master');
+        return view('backend.pages.dashbroad');
     }
 }

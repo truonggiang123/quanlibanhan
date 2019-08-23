@@ -12,6 +12,7 @@ danh sach Loai san pham
 @section('content')
 <h1>Danh sach san pham</h1>
 <a class="btn btn-primary" href="{{ route('backend.category.create')  }}">ADD</a>
+<a href="{{ route('backend.categorie.print') }}" class="btn btn-success">Print</a>
 <table class="table table-responsive-sm table-striped">
     <tr>
         <th>Ma lsp</th>

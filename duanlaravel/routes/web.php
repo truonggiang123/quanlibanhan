@@ -3,6 +3,7 @@
 use App\Http\Controllers\ExampleController;
 use App\Category;
 use App\Product;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,19 +43,31 @@ Route::get('/backend/product', function () {
         ->with('lisproduct', $list);
 });
 
-Route::get('backend/dabroad', 'Backend\PageController@darboard')->name('backend.page.dabroad');
-Route::get('backend/product', 'Backend\ProductController@index')->name('backend.product.index');
-Route::get('backend/product/create', 'Backend\ProductController@create')->name('backend.product.create');
-Route::post('/backend/product/store', 'Backend\ProductController@store')->name('backend.product.store');
-Route::get('backend/product/{id}/edit', 'Backend\ProductController@edit')->name('backend.product.edit');
-Route::post('backend/product/{id}/update', 'Backend\ProductController@update')->name('backend.product.update');
-Route::delete('backend/product/{id}', 'Backend\ProductController@destroy')->name('backend.product.destroy');
+Route::group(['middleware'=> 'auth'], function()
+{
 
-Route::get('backend/categorie', 'Backend\CategoryController@index')->name('backend.category.index');
-Route::get('backend/category/create', 'Backend\CategoryController@create')->name('backend.category.create');
+        Route::get('backend/dabroad', 'Backend\PageController@darboard')->name('backend.page.dabroad');
+        Route::get('backend/product', 'Backend\ProductController@index')->name('backend.product.index');
+        Route::get('backend/product/create', 'Backend\ProductController@create')->name('backend.product.create');
+        Route::post('/backend/product/store', 'Backend\ProductController@store')->name('backend.product.store');
+        Route::get('backend/product/{id}/edit', 'Backend\ProductController@edit')->name('backend.product.edit');
+        Route::post('backend/product/{id}/update', 'Backend\ProductController@update')->name('backend.product.update');
+        Route::delete('backend/product/{id}', 'Backend\ProductController@destroy')->name('backend.product.destroy');
 
-Route::post('/backend/category/store', 'Backend\CategoryController@store')->name('backend.category.store');
+        Route::get('backend/categorie', 'Backend\CategoryController@index')->name('backend.category.index');
+        Route::get('backend/category/create', 'Backend\CategoryController@create')->name('backend.category.create');
 
-Route::get('backend/category/{id}/edit', 'Backend\CategoryController@edit')->name('backend.category.edit');
-Route::post('backend/category/{id}/update', 'Backend\CategoryController@update')->name('backend.category.update');
-Route::delete('backend/category/{id}', 'Backend\CategoryController@destroy')->name('backend.category.destroy');
+        Route::post('/backend/category/store', 'Backend\CategoryController@store')->name('backend.category.store');
+
+        Route::get('backend/category/{id}/edit', 'Backend\CategoryController@edit')->name('backend.category.edit');
+        Route::post('backend/category/{id}/update', 'Backend\CategoryController@update')->name('backend.category.update');
+        Route::delete('backend/category/{id}', 'Backend\CategoryController@destroy')->name('backend.category.destroy');
+        Route::get('/admin/categorie/print', 'Backend\CategoryController@print')->name('backend.categorie.print');
+});
+
+Route::get('/admin/api/getProductcount', 'Backend\Api\ApiController@getProductcount')->name('backend.api.getProductcount');
+Route::get('/admin/api/getStatiticsCategoryProductCount', 'Backend\Api\ApiController@getStatiticsCategoryProductCount')->name('backend.api.getStatiticsCategoryProductCount');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

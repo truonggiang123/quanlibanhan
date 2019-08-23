@@ -13,7 +13,7 @@ danh sach Loai san pham
 <h1>Danh sach san pham</h1>
 <a class="btn btn-primary" href="{{ route('backend.product.create')  }}">ADD</a>
 
-<table class="table table-bordered table-striped table-responsive">
+<table class="table table-bordered table-responsive">
     <tr>
         <th>Ma lsp</th>
         <th>ten sp</th>
@@ -47,10 +47,10 @@ danh sach Loai san pham
             <div class="btn-group-vertical">
                 <a class="btn btn-primary" href="{{ route('backend.product.edit', ['id' => $product->id]) }}">update</a><br>
             </div>
-            <form id="frmDeleteProduct" name="frmDeleteProduct" method="post" action="{{ route('backend.product.destroy', ['id' => $product->id]) }}">
+            <form id="frmDeleteProduct"  name="frmDeleteProduct" method="post" action="{{ route('backend.product.destroy', ['id' => $product->id]) }}">
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="DELETE" />
-                <button class="btn btn-danger btn-icon-split btn-delete">
+                <button class="btn btn-danger btn-icon-split delete">
                     <span class="icon text-white-50">
                         <i class="fas fa-trash"></i>
                     </span>
@@ -68,7 +68,7 @@ danh sach Loai san pham
     $(document).ready(function() {
         // Gọi thử SweetAlert
         //Swal.fire('Hello world!');
-        $('.btn-delete').click(function(e) {
+        $('.delete').click(function(e) {
             e.preventDefault();
             Swal.fire({
                 title: 'Bạn có chắc thực hiện thao tác không?',
@@ -85,7 +85,7 @@ danh sach Loai san pham
                         'Sản phẩm đã được xóa.',
                         'success'
                     )
-                    $('#frmDeleteProduct').submit();
+                    $(this).parent('#frmDeleteProduct').submit();
                 }
             })
 

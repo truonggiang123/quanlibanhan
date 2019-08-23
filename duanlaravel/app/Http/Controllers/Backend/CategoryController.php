@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
+
 use App\Http\Requests\CategorycreateRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -55,7 +56,7 @@ class CategoryController extends Controller
         }
 
         $categories->save(); //luu lai vao co so du lieu
-       
+
 
         return redirect()->route('backend.category.index'); // trong route la backend.Category.index
     }
@@ -95,9 +96,8 @@ class CategoryController extends Controller
         $categories->category_code = $request->Category_code;
         $categories->category_name = $request->Category_name;
         $categories->description = $request->decription;
-        if(!empty($request->image))
-        {
-        $categories->image = $request->image;
+        if (!empty($request->image)) {
+            $categories->image = $request->image;
         }
 
         if ($request->hasFile('image')) {
@@ -126,5 +126,11 @@ class CategoryController extends Controller
         // Schema::enableForeignKeyConstraints();
         Category::find($id)->delete();
         return redirect()->route('backend.category.index');
+    }
+    public function print()
+    {
+        $lstCategories = Category::all();
+        return view('backend.Category.print')
+            ->with('lstCategories', $lstCategories);
     }
 }
